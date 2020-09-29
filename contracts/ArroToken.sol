@@ -26,8 +26,6 @@ import "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol";
 
 contract ArroToken is Initializable, ContextUpgradeSafe, OwnableUpgradeSafe, ERC20PausableUpgradeSafe {
 
-    uint256 private _totalSupply;
-
     // ------------------------------------------------------------------------
     // Gives Owner all tokens
     // ------------------------------------------------------------------------
@@ -38,9 +36,7 @@ contract ArroToken is Initializable, ContextUpgradeSafe, OwnableUpgradeSafe, ERC
         __Pausable_init_unchained();
         __ERC20Pausable_init_unchained();
 
-        _totalSupply = 30000000000 * (10 ** 18);
-
-        _mint(owner, 10000 * (10 ** uint256(decimals())));
+        _mint(owner, 30000000000 * (10 ** uint256(decimals())));
         transferOwnership(owner);
     }
 
