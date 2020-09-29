@@ -18,10 +18,13 @@ pragma solidity ^0.6.2;
 //
 // ----------------------------------------------------------------------------
 
-import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol";
 import "@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/token/ERC20/ERC20Pausable.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol";
 
-contract ArroToken is Initializable, ERC20UpgradeSafe, OwnableUpgradeSafe {
+contract ArroToken is Initializable, ContextUpgradeSafe, OwnableUpgradeSafe, ERC20PausableUpgradeSafe {
 
     uint256 private _totalSupply;
 
@@ -29,9 +32,11 @@ contract ArroToken is Initializable, ERC20UpgradeSafe, OwnableUpgradeSafe {
     // Gives Owner all tokens
     // ------------------------------------------------------------------------
     function initialize(address owner) public {
-        // Defaults to 18 decimals
-        __ERC20_init("Arro.io", "ARRO");
-        __Ownable_init();
+        __Context_init_unchained();
+        __Ownable_init_unchained();
+        __ERC20_init_unchained("Arro.io", "ARRO");
+        __Pausable_init_unchained();
+        __ERC20Pausable_init_unchained();
 
         _totalSupply = 30000000000 * (10 ** 18);
 
@@ -45,6 +50,20 @@ contract ArroToken is Initializable, ERC20UpgradeSafe, OwnableUpgradeSafe {
     function transferAnyERC20Token(address tokenAddress, uint amount) public onlyOwner returns (bool) {
         _transfer(tokenAddress, owner(), amount);
         return true;
+    }
+
+    // ------------------------------------------------------------------------
+    // Owner can pause all transfers
+    // ------------------------------------------------------------------------
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    // ------------------------------------------------------------------------
+    // Owner can unpause all transfers
+    // ------------------------------------------------------------------------
+    function unpause() public onlyOwner {
+        _unpause();
     }
 
 }
