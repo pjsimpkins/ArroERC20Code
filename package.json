@@ -1,7 +1,10 @@
 {
   "dependencies": {
     "@openzeppelin/cli": "^2.8.2",
+    "@openzeppelin/contracts": "^3.2.0",
+    "@openzeppelin/contracts-ethereum-package": "^3.0.0",
+    "@openzeppelin/upgrades": "^2.8.0",
     "ganache-cli": "^6.11.0",
-    "solc": "^0.7.2"
+    "solc": "0.6.2"
   }
 }
