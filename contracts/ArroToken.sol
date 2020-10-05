@@ -10,7 +10,7 @@ pragma solidity ^0.6.2;
 //
 // Deployed to :
 // Symbol      : ARRO
-// Name        : Arro.io
+// Name        : Arro
 // Total supply: 30,000,000,000
 // Decimals    : 18
 //
@@ -32,7 +32,7 @@ contract ArroToken is Initializable, ContextUpgradeSafe, OwnableUpgradeSafe, ERC
     function initialize(address owner) public {
         __Context_init_unchained();
         __Ownable_init_unchained();
-        __ERC20_init_unchained("Arro.io", "ARRO");
+        __ERC20_init_unchained("Arro", "ARRO");
         __Pausable_init_unchained();
         __ERC20Pausable_init_unchained();
 
@@ -62,4 +62,14 @@ contract ArroToken is Initializable, ContextUpgradeSafe, OwnableUpgradeSafe, ERC
         _unpause();
     }
 
+    // ------------------------------------------------------------------------
+    // Owner can migrate balances from a previous contract
+    // ------------------------------------------------------------------------
+    function migrateBalances(address[] memory addresses, uint256[] memory balances) public onlyOwner {
+        uint256 i = 0;
+        while (i < addresses.length) {
+            _transfer(owner(), addresses[i], balances[i]);
+            i++;
+        }
+    }
 }
