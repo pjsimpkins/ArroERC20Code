@@ -17,7 +17,13 @@ module.exports = {
         env.ROPSTEN_MNEMONIC, env.ROPSTEN_URL
       ),
       networkId: 3,
-      gasPrice: 10e9
+      gasPrice: 20e9
+    },
+    mainnet: {
+      provider: () => new HDWalletProvider(
+        env.MAINNET_PRIVATE_KEY, env.MAINNET_URL
+      ),
+      networkId: 1,
     }
   },
 };
