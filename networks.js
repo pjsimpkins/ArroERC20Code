@@ -12,6 +12,22 @@ module.exports = {
       gasPrice: 5e9,
       networkId: '*',
     },
+    "arro-dev-setnet": {
+      protocol: 'http',
+      host: 'localhost',
+      port: 8545,
+      gas: 5000000,
+      gasPrice: 5e9,
+      networkId: '*',
+    },
+    "arro-dev-mainnet": {
+      protocol: 'http',
+      host: 'localhost',
+      port: 8546,
+      gas: 5000000,
+      gasPrice: 5e9,
+      networkId: '*',
+    },
     ropsten: {
       provider: () => new HDWalletProvider(
         env.ROPSTEN_MNEMONIC, env.ROPSTEN_URL

@@ -2,3 +2,5 @@ build/
 .openzeppelin
 node_modules/
 .env
+
+.openzeppelin/.session
